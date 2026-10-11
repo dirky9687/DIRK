@@ -1,0 +1,4 @@
+M5Cardputer - M5Stack Technology CO LTD
+Copyright (c) 2025 M5Stack Technology CO LTD
+SPDX-License-Identifier: MIT
+Source: https://github.com/m5stack/M5Cardputer
