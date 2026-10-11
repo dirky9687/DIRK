@@ -1,0 +1,65 @@
+DIRK v0.7.18 — RED OPERATIONS UI PASS 2 (SOURCE TEST)
+
+Baseline: user's v0.7.17-RED-TEAM-PASS1-TEST source archive.
+Goal: present scan/validation outcomes on dedicated screens instead of in menus.
+
+NEW LAYOUT
+- In Red mode Wi-Fi toolkit now has 6 streamlined choices:
+  Recon, Analysis, Network Survey, Blue Guard, Red Operations, 5G Diagnostics.
+- Red Operations groups: Target Posture/CSV, Authorized Validation,
+  Gateway Service Survey, RF Channel Spectrum, Beacon/Portal Lab,
+  Saved Targets, Capture Evidence.
+- Wi-Fi/Blue Guard now opens a full-screen 3-page comparison and observation
+  summary from "scan + results"; Enter opens change alerts, Back returns to
+  summary or tools according to entry point.
+- Gateway Service Survey retains the existing bounded common TCP-port check;
+  Enter opens a five-row results list; Enter a selected result for details;
+  Tab reruns the same bounded check. Results remain visible until next scan.
+- Existing authorized validation operations show a separate two-page result
+  view with the operation, selected saved target, result and capture counters.
+  This is a display change only; it does not increase capabilities, packet
+  counts or supported bands. Leaving the validation tool still stops captures.
+- Target Posture now has Enter-to-inspect finding details and remediation
+  advice; Tab still exports CSV.
+- Explicit Back navigation for Red hub, result screens and evidence browser.
+
+LIMITATIONS
+- A successful TCP connect confirms that the attempted connection was
+  accepted, NOT the service type/version or security posture.
+- A validation tool return code is NOT proof a client was disconnected.
+- Passive RF comparison cannot establish that an unknown AP is malicious.
+- The MonsterC5 still has the same firmware, protocol, 5GHz metadata limits.
+- This is a SOURCE TEST; must compile in PlatformIO and run on Cardputer ADV.
+
+FROZEN BASELINE (verified byte-for-byte against v0.7.17)
+MonsterC5 adapter/CSV/indexed-name parser and transport; ESP32-S3 Wi-Fi
+provider; BLE/GPS/LoRa/IR providers; target manager; Wardrive/XP; capture
+engine; network tools scanner; portal; Blue Guard comparator; RedAudit rules.
+No new RF commands or transmissions added.
+
+FILES CHANGED
+src/ui/Ui.h
+src/core/DirkApp.cpp (version label only)
+tools/tests/menu_nav_static.py, red_tools_static.py,
+unified_scanner_static.py, v0716_ap_recon_static.py (updated expectations)
+tools/tests/red_ui_static.py (new UI checks)
+README.md, docs/REDTEAM-0.7.18-UI-ROADMAP.md, this release note
+
+BUILD ON KALI (once unzipped as ~/Projects/DIRK-v0.7.18):
+  source /home/USER/.platformio-venv/bin/activate
+  cd ~/Projects/DIRK-v0.7.18
+  pio run -e cardputer-adv
+
+HARDWARE CHECKS
+- Wi-Fi -> Red Operations -> Gateway Service Survey: scan, port list,
+  port detail, Back to results, Back to survey, Back to Red hub.
+- Wi-Fi -> Blue Guard -> Scan + Results: pages L/R, Enter change alerts,
+  Back to summary, Back to Blue Guard.
+- Wi-Fi -> Red Operations -> Target Posture: Enter recommendations,
+  Back to posture, Tab export CSV.
+- Wi-Fi -> Red Operations -> Authorized Validation: choose authorized lab
+  target only, view result pages, Back to tool then hub; verify capture stops.
+- Confirm dual-band SSID grouping, 5GHz C5 diagnostics, Wardrive GPS/BLE/5G,
+  responsive matrix/menu, and Buddy XP continue working.
+
+ROLLBACK: keep known-good v0.7.17 on SD until v0.7.18 tested.

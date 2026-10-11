@@ -1,0 +1,10 @@
+DIRK v0.6.5-FIX1
+
+Compile-fix release for v0.6.5.
+
+Fixed:
+- Renamed the IR SD-remotes renderer from irFiles(...) to irFilesScreen(...).
+- This removes a C++ class-scope identifier collision with the existing irFiles[] IR file-entry array.
+- Updated renderActive() screen 62 dispatch to call irFilesScreen().
+
+No intended behavior changes to Wi-Fi scanning, Blue Guard, BLE analysis, IR transmit/replay, mesh, wardrive, clock, battery, or UI buffering.

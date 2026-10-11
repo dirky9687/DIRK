@@ -1,0 +1,26 @@
+DIRK v0.4.3
+
+Hardware-fix pass based on the uploaded v0.4.2 current source.
+
+Splash / menu:
+- Splash foreground is now only the themed hooded silhouette + DIRK wordmark.
+- All other splash pixels are transparency-keyed so live matrix rain is visible behind the foreground.
+- Red mode keeps the red heart/knife motif; Blue mode uses the blue silhouette without that motif.
+- Matrix rain uses mixed letters, numbers, and symbols rather than binary 0/1 strings.
+- Matrix heads now advance downward as animation phase increases.
+- Menu matrix begins below the protected DIRK wordmark zone.
+- Animated menu icons remain transparent over the matrix field.
+
+Footer:
+- Display text wrapping is disabled for footer rendering.
+- Footer wording remains compact and hard-left/right bounded.
+
+5 GHz / MonsterC5:
+- C5 scanner and AP monitor now display only Band::Band5 targets while 5G mode is selected.
+- Saved/stale 2.4 GHz targets no longer populate the C5 scan list.
+- AP detail now tracks the actual filtered target index instead of reusing a mixed-list ordinal.
+- JanOS parser rejects implausible/non-5GHz channel records and requires RSSI plus scan/SSID context.
+- Continuous C5 scan behavior remains active until leaving the live scan page.
+
+Safety:
+- This pass does not increase active-test intensity or remove authorization boundaries.

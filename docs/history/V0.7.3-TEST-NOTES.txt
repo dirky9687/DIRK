@@ -1,0 +1,42 @@
+DIRK v0.7.3 – Wardrive frame clipping + MonsterC5 evidence build
+
+What changed
+1) Menu animation retained without modifications from working v0.7.2.
+2) Wardrive: dynamic scene now renders into the existing 240x117 sprite
+   and transfers only the lower 240x82 region via the LGFX display clip
+   rectangle (35..116) every 90 ms. This reduces transferred pixels by
+   ~30% per animated frame, without allocating another sprite. The C5/GPS
+   counters and status header are updated separately at most once/s or on
+   a header state change. The XP strip remains in the dynamic region.
+3) C5 diagnostics: 4 pages with RX/TX bytes/lines, drop/overlong counts,
+   scan starts/completions, parser reject categories, last scan command,
+   last raw AP candidate and last raw UART line. Left/right move pages;
+   Tab starts a C5 scan. The raw record pages should help identify the
+   REAL installed C5 firmware's output format and any UART issue.
+4) Parser counts 2.4 GHz records separately; 5GHz classification unchanged.
+   C5 UART line buffer increased to 768 characters to avoid dropping a
+   longer but valid projectZero/JanOS reply.
+5) Splash and wardrive logging version strings updated to 0.7.3.
+
+IMPORTANT
+- These are test/debug changes. No live Cardputer ADV + MonsterC5
+  testing and no PlatformIO compile was possible in this environment.
+- This does not flash/update JanOS on the separate MonsterC5 module.
+- We cannot guarantee 5GHz discovery until the UART diagnostic output
+  proves scan commands reach the C5 and the actual record format is known.
+- If still no 5GHz SSIDs, take photos of all 4 pages after waiting 20-25
+  seconds on the 5G Diagnostics screen. Also test a known 5GHz-only SSID
+  fixed to a non-DFS channel such as 36 or 149 (where locally permitted).
+- Independent C5 hardware test: confirm a known 5GHz SSID appears using
+  the official C5Lab companion firmware (separate from DIRK) and confirm
+  JanOS/projectZero is installed on the MonsterC5 board itself.
+
+Build from source on cyberdeck:
+  source /home/USER/.platformio-venv/bin/activate
+  unzip -o ~/Downloads/DIRK-v0.7.3-TEST-DIAGNOSTIC.zip -d ~/Projects/DIRK-v0.7.3
+  cd ~/Projects/DIRK-v0.7.3
+  pio run -e cardputer-adv
+
+SD transfer (only after compile passes, assuming previous mount still valid):
+  cp -v .pio/build/cardputer-adv/firmware.bin /run/media/USER/0403-0201/Downloads/DIRK-v0.7.3.bin
+  sync

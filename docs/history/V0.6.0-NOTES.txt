@@ -1,0 +1,28 @@
+DIRK v0.6.0 — LoRa / Mesh expansion
+====================================
+
+Base: v0.5.3-FIX8. The FIX8 2.4 GHz scan state machine is preserved.
+
+Added:
+- Main-menu LoRa section.
+- Direct Cap LoRa-1262 SX1262 support through RadioLib.
+- Correct ADV pin map and PI4IOE5V6408 antenna-switch enable.
+- Shared SPI coexistence with microSD (LoRa CS5 / SD CS12).
+- DIRK Mesh open packet protocol usable by any compatible SX1262 client.
+- QWERTY mesh chat with SD chat logging.
+- Node/contact list with RSSI/SNR and last-seen state.
+- Periodic node advertisements.
+- GPS position beacons and manual position transmit.
+- TTL-based relay/deduplication.
+- Range-test ping/reply counters with RSSI/SNR.
+- US915 / EU868 / AU915 region presets.
+- Balanced / Long / Fast modem presets.
+- TX power, hop limit, relay, GPS-beacon, region and modem settings persisted in NVS.
+- Live LoRa diagnostics.
+- Meshtastic BLE service discovery.
+- Full Meshtastic ADV sidecar build helper + architecture documentation.
+
+Important:
+- DIRK Mesh is NOT the Meshtastic on-air protocol and is intentionally labelled separately.
+- Full upstream Meshtastic remains a separate sidecar firmware because the Cardputer ADV has no PSRAM and DIRK already carries Wi-Fi/BLE/wardrive subsystems.
+- Never power/transmit through the LoRa cap without its antenna attached.

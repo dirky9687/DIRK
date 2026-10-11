@@ -1,0 +1,4 @@
+DIRK v0.4.6 FIX1
+- Fixes Cardputer ADV PlatformIO compile failure caused by Arduino's radians() macro colliding with WardriveManager's local helper.
+- Renamed the local helper to degToRad() and updated all distance-calculation calls.
+- No intended functional changes beyond restoring a clean compile path.

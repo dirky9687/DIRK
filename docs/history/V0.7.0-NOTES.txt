@@ -1,0 +1,34 @@
+DIRK v0.7.0 — Wardrive Personality + Performance Foundation
+
+Built from v0.6.5-FIX1.
+
+Performance / stutter pass
+- Top-level animated DIRK side panels refresh only their panel region between input events instead of recomposing the full 240x117 body.
+- Panel animation cadence increased while reducing total pixels redrawn.
+- Wardrive discovery ingestion is budgeted across loop iterations so a dense scan cannot process every newly discovered Wi-Fi/BLE target in one frame.
+- Wardrive SD logging is buffered and flushed in staggered intervals instead of opening/flushing/closing a file for each discovered device.
+- Progression SD mirroring is deferred to session stop; NVS remains the authoritative live XP store.
+- Existing FIX8 Wi-Fi async scan lifecycle and v0.6.3-FIX1 double-buffered screen rendering remain intact.
+
+Wardrive progression v2
+- Expands progression from 15 ranks to 100 levels across 10 military/hacker/1337 themed tiers.
+- Uses a nonlinear XP curve that stays familiar early and becomes a long-haul progression above the mid ranks.
+- Adds persistent career sessions, Wi-Fi observations, BLE observations, GPS fixes, distance, best Wi-Fi session, and longest-session distance.
+- Adds Operator Dossier view with career and current-run statistics.
+- Adds a compact level/rank + XP progress strip immediately below the live wardrive header.
+- Current rank is no longer repeated inside normal buddy speech bubbles; rank/tier appears there only for promotion events.
+
+Recon buddy overhaul
+- Simple cat driver head pops out of the tank hatch.
+- Expressions: happy, excited, serious, surprised, sad, sleepy, and smug.
+- Personality changes across the ten progression tiers, from eager rookie chatter to terse veteran/1337 lines.
+- Event-specific chatter for Wi-Fi, 5 GHz, hidden/open networks, BLE, distance sectors, milestones, GPS loss/recovery, and promotions.
+- Anti-repeat selection reduces back-to-back duplicate chatter.
+- Heavy recent Wi-Fi density adds lightweight incoming-mortar/explosion effects behind the buddy and speech bubble.
+- Speech bubble is rendered last and bounded above the HUD so background/tank effects cannot clip through it.
+- Adds nonblocking speaker chirps/fanfare for discoveries, 5 GHz contacts, milestones, GPS state changes, and promotions.
+- Wardrive menu adds persistent Buddy Sound on/off toggle.
+
+Scope
+- This v0.7.0 archive is the wardrive/personality/performance foundation. It does not claim the larger planned Red Team expansion is complete.
+- Cardputer PlatformIO compile and hardware validation remain required.

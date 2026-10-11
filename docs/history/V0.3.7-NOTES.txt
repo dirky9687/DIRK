@@ -1,0 +1,7 @@
+DIRK v0.3.7 persistence + BLE pass
+- Team mode persists in ESP32 NVS across reboot.
+- Saved/authorized Wi-Fi targets persist to /dirk/targets/saved.csv and reload at boot.
+- BLE page now performs passive advertisement scans and lists name/RSSI.
+- Existing v0.3.6 splash/menu/Wi-Fi scanner/AP inspect/spectrum behavior retained.
+- 5 GHz remains capability-gated until the exact JanOS UART scan grammar/result format is validated on the attached MonsterC5; no fake 5 GHz results are generated.
+- Active beacon/deauth transmitters are not included in this pass; authorized-target gates remain intact.

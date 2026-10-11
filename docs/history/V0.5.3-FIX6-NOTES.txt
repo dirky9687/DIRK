@@ -1,0 +1,10 @@
+DIRK v0.5.3-FIX6
+
+- Restores the exact hardware-tested v0.3.9 synchronous 2.4 GHz scan semantics.
+- Runs that proven scan in a FreeRTOS worker task so menus/wardrive remain responsive.
+- Recon and wardrive both consume the same global S3 scan provider.
+- Live target lists continue to use lastSeen/reconEpoch filtering; saved-only entries are not injected.
+- Removes the FIX5 opaque gray/blue buddy backing and restores transparent ASCII tank art.
+- Keeps the persistent miles/kilometers setting from FIX5.
+
+Primary goal: restore global 2.4 GHz discovery first, without reintroducing UI blocking.

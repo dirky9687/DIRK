@@ -1,0 +1,28 @@
+DIRK v0.5.0 - Wardrive Buddy / Progression Overhaul
+
+Wardrive buddy
+- Time-based full-screen patrol rather than a mostly stationary sprite.
+- Larger ASCII recon tank with no DIRK lettering inside the hull.
+- Left/right travel poses, edge-turn poses, GPS-lost pose, discovery recoil/fire pose.
+- Alternating tread glyphs, suspension bounce, antenna/radar sparkle.
+- Three-layer moving world: far radio skyline, midground hills/bumps, fast foreground road/tread marks.
+- Passing signs/rocks for stronger motion cues.
+
+Speech / HUD
+- Dynamic speech bubble width/height based on rendered text length.
+- Two-line safe wrapping for longer quips.
+- Bubble automatically changes sides based on buddy position.
+- Dedicated XP / level-up status line inside the bubble.
+- Bottom HUD moved into a hard safe area above the footer to prevent clipping.
+
+Progression
+- Replaced flat 50-XP-per-level progression with deliberate non-linear thresholds.
+- Added named ranks from "driveway recruit" through "lord of the lanes".
+- Added level-up flash state and rank display.
+- Added Wi-Fi, BLE, and distance milestone XP bonuses.
+- Expanded stats screen with title and next-level XP target.
+
+Versioning
+- Runtime and wardrive export version strings updated to v0.5.0.
+
+Hardware behavior from v0.4.9 is otherwise retained.

@@ -1,0 +1,13 @@
+DIRK v0.7.1 source-level audit fixes (UNVALIDATED HARDWARE BUILD)
+
+- Remove 5GHz target deletion on every UI scan request; prevents intermittently missed networks disappearing.
+- Bound UART RX work (768 bytes / 1.6 ms per update) to reduce frame starvation.
+- Increase C5 serial line length from 220 to 384 chars and queue from 16 to 32.
+- Detect overflowing C5 UART lines and queued record loss rather than passing truncated partial records.
+- Limit C5 AP record parse work to 12 per main-loop iteration.
+- Allow 5GHz records without an explicit ssid or scan text if BSSID, valid channel, and RSSI exist.
+- Avoid duplicate wardrive live tick invalidation and priority-inversion from header telemetry.
+- Retain FIX8 2.4GHz async scanner and synchronous fallback.
+
+IMPORTANT: No compiler/hardware validation was available in this environment.
+Check the current MonsterC5/JanOS firmware serial protocol using the diagnostics page; scan command and physical antenna/channel restrictions may still account for missing APs.

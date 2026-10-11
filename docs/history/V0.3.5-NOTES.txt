@@ -1,0 +1,9 @@
+DIRK v0.3.5 UI + AP Inspect
+- Splash uses readable DIRK mark only; sequential POST cards remain.
+- Main right rail removes duplicate wording and reserves separate logo/icon areas.
+- Context icon animates via partial-region redraw only (no full-screen animation redraw).
+- Home shortcuts: W Wi-Fi, B BLE, D Wardrive, C Captures, A Audits, N Network Tools, S Sessions, F Files, T Settings.
+- 2.4 GHz AP list retains compact scan layout and marks O=open / L=locked.
+- Selecting an AP opens AP INSPECT terminal-style passive scan metadata: SSID, BSSID, band, channel, RSSI, security and access state.
+- S or Enter saves the inspection report to /dirk/targets/AP_<BSSID>.txt on SD.
+- Report explicitly identifies its source as passive Wi-Fi scan metadata; it does not invent Nmap port/service results.

@@ -1,0 +1,6 @@
+DIRK v0.6.2-FIX1
+
+Compile fixes for v0.6.2:
+- Renamed internal daylight-saving enum constants so they do not collide with ESP/newlib DST_NONE and related system identifiers from sys/time.h.
+- Made GpsProvider::utcEpoch() non-const because TinyGPSPlus date/time accessors in the pinned library are non-const.
+- No intentional changes to FIX8 Wi-Fi scanning, LoRa/mesh behavior, GPS timezone logic, or battery/header behavior.

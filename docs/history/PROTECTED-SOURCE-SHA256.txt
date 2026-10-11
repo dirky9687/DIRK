@@ -1,0 +1,9 @@
+# Unchanged files: sha256, matched to v0.7.14 baseline
+9890396b2a6fe8a030888af359687e22b4948ac6d9acb73ed1d3d2b7d7751ffd  src/providers/c5/C5CsvApParser.h
+5a647e9889dc7c4eb7da1e079fc225ec5c3184f0af861635d85ae03119e8ba84  src/providers/c5/JanOSAdapter.h
+2d42ff671c71c8bcc57a7837a2287f05295b3b420bb51ca5a1206a848943ccf1  src/providers/c5/C5Transport.h
+f02ef7bf9c58983cd1b32067d0a830302d1c9d5b071c1a69d0935ffcaef44891  src/providers/s3/S3WifiProvider.h
+318cd5a843282d6630521a410bf26ff71e6390900a92adea8c646cb5061b9a4a  src/providers/gps/GpsProvider.h
+172c2c038fd014d2f947787ccb56776ad7de376bb96b79b562aeb05ec0be02e2  src/providers/ble/BleProvider.h
+fc7bc0774f9273d0704f5d3c149f7f83a9349e79e24454fe3e34f7e99380db72  src/targets/TargetManager.h
+13d7dda19e696372f3c0d3c4f0ba9c388c3df986fe24edf9eebbb50540e2ed22  src/wardrive/XpLedger.h

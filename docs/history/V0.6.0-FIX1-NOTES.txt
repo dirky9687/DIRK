@@ -1,0 +1,10 @@
+DIRK v0.6.0-FIX1
+
+Build fix:
+- Fixes ESP32-S3 linker failure in LoRaProvider::rxThunk().
+- Moves the RadioLib packet-received ISR out of the header into LoRaProvider.cpp.
+- Places the receive flag in internal DRAM with DRAM_ATTR.
+- Keeps the callback in IRAM, matching RadioLib's ESP32 interrupt model.
+- Removes the unused LoRaProvider::instance pointer.
+
+No intentional functional changes to FIX8 Wi-Fi scanning or v0.6.0 LoRa/Mesh behavior.

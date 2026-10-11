@@ -1,0 +1,13 @@
+DIRK v0.7.10 - Background Wardrive End Session test
+
+Based on 0.7.9. All GPS, 2.4GHz Wi-Fi, XP ledger, main-menu rendering and JanOS parser code are unchanged.
+
+- Wardrive menu now includes an explicit End Session entry just below Start / Resume.
+- End Session closes the session through WardriveManager::stop(), including XP ledger, CSV/jsonl logs, track and stats.
+- Before flipping Wardrive mode off, outstanding S3 asynchronous scan state is cancelled (prevents blocking fallback afterwards).
+- A running BLE dwell is cancelled, as is an active MonsterC5 scan.
+- Buddy audio is silenced immediately.
+- Returning to the home menu with an active run still leaves it running; End Session must be chosen explicitly.
+- 5 GHz discovery remains an outstanding independent issue. Read Wi-Fi -> 5G Diagnostics: UART RX, scan-start/done, rejection counters, and last raw line.
+
+This is SOURCE for a hardware test, not compiled or field-verified firmware.

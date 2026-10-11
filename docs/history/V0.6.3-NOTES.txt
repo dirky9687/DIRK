@@ -1,0 +1,50 @@
+DIRK v0.6.3
+============
+
+UI / redraw
+-----------
+- Uses the existing 240x117 M5Canvas as the normal header+body back buffer for
+  all UI screens. Menu/input redraws are composed in RAM and pushed as one frame.
+- The wardrive buddy keeps its fast buffered animation path.
+- Header time/battery changes remain header-only refreshes.
+- Main and section-panel animation runs at 240 ms without direct clear/repaint
+  of the physical right-side panel.
+
+Section panels / icons
+----------------------
+- Main menu retains the DIRK mark + Matrix panel.
+- Wi-Fi, Bluetooth, Wardrive, and LoRa top-level menus now carry the same panel.
+- Once inside one of those sections, the panel icon stays fixed to the section.
+- Reworked compact menu icons and added larger recognizable panel pictograms for:
+  Wi-Fi, Bluetooth, Wardrive, LoRa, Captures, Audits, Sessions, Files, Settings.
+
+Footer cleanup
+--------------
+- Removed the duplicate "tab delete / bk back" line from file detail content;
+  the command now exists only in the footer (delete confirmation still appears).
+- Removed the duplicate friend action line from Mesh Profile; friend/scan/open
+  controls remain in the footer.
+
+Time / DST
+----------
+- GPS/NTP still maintain the ESP32 clock in UTC.
+- Automatic timezone still comes from the cached GPS-region profile.
+- DST is now evaluated against explicit calendar transition instants:
+  * US: second Sunday March 02:00 standard -> first Sunday November 02:00 daylight.
+  * EU/UK: last Sunday March 01:00 UTC -> last Sunday October 01:00 UTC.
+  * Australia profile: first Sunday October -> first Sunday April.
+  * New Zealand profile: last Sunday September -> first Sunday April.
+- Fixes the one-hour error around the US November transition caused by testing
+  the end boundary in standard time rather than daylight time.
+
+Preserved
+---------
+- FIX8 2.4 GHz Wi-Fi scan architecture is unchanged.
+- v0.6.1 DIRK/Meshtastic/MeshCore discovery/contact architecture is unchanged.
+- v0.6.2 GPS clock and smoothed battery HUD remain enabled.
+
+Build note
+----------
+This archive was structurally checked and packaged in the ChatGPT execution
+container. The authoritative ESP32/Cardputer PlatformIO compile remains the
+cyberdeck build.

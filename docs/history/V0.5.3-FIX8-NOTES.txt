@@ -1,0 +1,42 @@
+DIRK v0.5.3-FIX8
+=================
+
+Primary purpose: keep FIX7's restored 2.4 GHz discovery reliability while removing the normal scan path from the UI/render critical path.
+
+Changes
+-------
+- Preserved the proven FIX7 ESP32-S3 radio ownership/reset sequence:
+  * promiscuous mode off,
+  * stale scan data deleted,
+  * STA auto-reconnect disabled,
+  * disconnect without erasing saved credentials,
+  * Wi-Fi OFF settle,
+  * Wi-Fi STA settle,
+  * hidden SSIDs included,
+  * 300 ms maximum dwell per channel.
+- Replaced FIX7's blocking 100 ms / 60 ms / 120 ms reset delays with a millis()-driven state machine.
+- Starts WiFi.scanNetworks(... async=true ...) only from the normal Arduino loop task. No FreeRTOS Wi-Fi scan worker is used.
+- Polls WiFi.scanComplete() from S3WifiProvider::update().
+- Completed scan results are staged and published to TargetManager from DirkApp::update().
+- Retains the exact FIX7 synchronous reset + scan path as an automatic fallback if the async scan fails or times out.
+- Added completionSerial() and resultSerial() scan generations.
+- AP scanner periodic refresh no longer dirties/repaints the TFT just because a scan was requested.
+- AP scanner redraws after its first fresh scan, then only when the meaningful scan-result signature changes.
+- Result signature is order-independent and ignores tiny RSSI flutter by grouping RSSI in ~4 dB steps.
+- Spectrum/AP-monitor/signal screens refresh on completed scans rather than scan-start polling ticks.
+- Wardrive keeps strict S3 Wi-Fi/BLE time-slicing: neither starts while the other owns the shared 2.4 GHz radio.
+- BLE UI scans also defer while the S3 Wi-Fi scan state machine is active.
+- MonsterC5/JanOS 5 GHz scanning remains independent over UART.
+- Wardrive buddy/tank sprite path and existing ~70 ms render cadence are unchanged; with normal Wi-Fi sweeps no longer blocking the main loop, animation should remain responsive during 2.4 GHz scanning.
+
+Fallback behavior
+-----------------
+If the Arduino/ESP32 async scan reports WIFI_SCAN_FAILED or exceeds its bounded timeout, DIRK performs the hardware-proven FIX7 synchronous reset + scan. That exceptional fallback can still briefly pause animation, by design, rather than sacrificing AP discovery reliability.
+
+Hardware validation focus
+-------------------------
+1. Confirm known 2.4 GHz APs still populate consistently.
+2. Confirm wardrive buddy/tank motion remains smooth while 2.4 GHz sweeps are running.
+3. Confirm BLE and 2.4 GHz Wi-Fi do not overlap on the S3 radio.
+4. Confirm AP scanner does not visibly repaint at every polling tick when the result set is unchanged.
+5. If a fallback occurs, lastScanCode() remains available and usedFallbackLastScan() can identify the fallback path during diagnostics.

@@ -1,0 +1,36 @@
+DIRK v0.4.2 — hardware correction pass
+
+IMPORTANT
+The prior v0.4.1 ZIP contained its project inside a DIRK-v0.4.1 subfolder. When it was extracted into the existing project directory, PlatformIO continued compiling the older top-level src tree. That is why the hardware still displayed v0.3.9 and none of the intended UI fixes appeared.
+
+This v0.4.2 archive is intentionally FLAT: platformio.ini, src/, include/, docs/, etc. are at the ZIP root. Extracting this archive directly into ~/Projects/DIRK-Professional-Beta-v0.3.2-RC will overwrite the actual files PlatformIO compiles.
+
+UI / splash
+- Boot footer visibly identifies DIRK v0.4.2.
+- Red splash recomposed for the 240x135 Cardputer ADV screen with the bottom 17 px reserved for status.
+- Blue splash is a separate blue-team treatment with the heart/knife foreground removed.
+- Splash matrix rain is animated only in background side columns so the central silhouette/art stays static.
+- Home DIRK mark has a fixed protected 104x34 rectangle.
+- Right-side matrix rain begins immediately below the logo.
+- Animated right-panel menu icons draw transparently over that matrix field.
+- Wi-Fi icon no longer paints an opaque black rectangle behind itself.
+- Footer was reduced to two short fixed zones to eliminate wrapping/clipping.
+
+Continuous passive operation
+- 2.4 GHz AP Scanner refreshes continuously until Back.
+- AP Monitor refreshes continuously until Back.
+- Channel Spectrum refreshes continuously with rise/decay bars until Back.
+- Probe and deauth passive monitors auto-sample until Back.
+- 5 GHz live pages repeatedly request scans until Back when the C5 link is responsive.
+
+MonsterC5 / JanOS
+- Cardputer ADV UART is now explicitly initialized at RX GPIO15 / TX GPIO13 / 115200 8-N-1.
+- JanOS primary scan command changed to `scan`.
+- A compatibility fallback sends `scan_networks` only if the primary scan produces no UART response.
+- Any received JanOS UART line establishes readiness; boot no longer depends solely on a `pong` string.
+- 5G Diagnostics shows configured pins, link/readiness, scan state, TX/RX byte/line counts, parser counts, last event, last TX, and last RX.
+- Leaving a 5 GHz live scan page sends `stop` and releases the operation.
+
+Safety boundary
+- This pass does not increase deauth/burst intensity or add unrestricted active transmission behavior.
+- Existing saved-target / authorization boundaries remain in place.

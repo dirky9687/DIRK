@@ -1,0 +1,24 @@
+DIRK v0.6.2 — GNSS clock + battery HUD
+
+NEW
+- GPS/NMEA UTC disciplines the ESP32 system clock once valid date/time is received.
+- Automatic timezone mode uses the current GNSS position to choose a compact offline timezone profile.
+- The resolved timezone profile is cached in NVS and survives reboot/loss of GPS.
+- Settings now include timezone auto/manual selection and 15-minute manual UTC-offset adjustment.
+- 12/24-hour clock setting continues to control the header clock.
+- Global header adds a battery gauge plus percentage using M5Cardputer.Power.getBatteryLevel().
+- Battery value is sampled every ~1.5 s and smoothed to avoid visible percentage bouncing under radio load.
+- Time/battery updates redraw only the header instead of invalidating the active screen.
+
+TIMEZONE NOTES
+- GPS supplies UTC and coordinates; it does not transmit a political timezone identifier.
+- DIRK's offline resolver covers broad North American, European, India/Nepal, China/Japan,
+  Australia and New Zealand profiles, then falls back to a longitude-derived 15-minute offset.
+- Political timezone borders and local DST exceptions are inherently more complex than a compact
+  embedded resolver. Use Settings -> timezone -> manual and adjust utc offset when needed.
+- Wi-Fi NTP remains available and now keeps the system clock in UTC so GNSS and NTP are compatible.
+
+PRESERVED
+- v0.6.1 event-driven mesh UI / multi-mesh discovery.
+- FIX8 Wi-Fi scan architecture.
+- Wardrive sleep inhibition and persistent progression.

@@ -1,0 +1,56 @@
+DIRK v0.6.1 — Mesh UX / multi-mesh discovery
+
+BASE
+- Built from the hardware-tested v0.6.0-FIX1 tree, which already includes the FIX8 Wi-Fi scan state-machine work.
+- The 2.4 GHz scanner architecture was intentionally not rewritten in this pass.
+
+MESH UI PERFORMANCE
+- Removed fixed 500 ms redraw polling from chat and node screens.
+- Chat redraws only when the LoRa message serial changes or the user types/navigates.
+- Node/nearby screens redraw only when node data or BLE discovery results change.
+- Meshtastic/MeshCore BLE discovery is scanned on a slower 5 s cadence when auto-discovery is enabled.
+- LoRa screens use the existing 240x117 off-screen canvas and are pushed to the TFT as one frame to reduce flashing/tearing.
+
+UNIFIED MESH UX
+- New LoRa menu order:
+  nearby mesh
+  chats / inbox
+  contacts
+  channels
+  positions
+  networks
+  range test
+  radio settings
+  diagnostics
+- Nearby Mesh combines:
+  D = native DIRK Mesh SX1262 peers
+  M = Meshtastic companion BLE advertisements
+  C = MeshCore companion BLE advertisements
+- Meshtastic service UUID: 6BA1B218-15A8-461F-9FA8-5DCAE273EAFD
+- MeshCore Companion service UUID: 6E400001-B5A3-F393-E0A9-E50E24DCCA9E
+- Device-name fallback detection is also used for companion radios that omit the service UUID from advertisements.
+
+CONTACTS / FRIENDS
+- Press F on a Nearby Mesh entry to favorite/friend it.
+- Contacts persist in ESP32 NVS.
+- When SD is writable, the contact list is mirrored to /dirk/lora/contacts.csv.
+- Contacts can include DIRK Mesh, Meshtastic, and MeshCore companion nodes.
+
+DIRK MESH DIRECT MESSAGES
+- Added protocol packet type D for native DIRK Mesh direct messages.
+- A discovered DIRK node profile can open a direct-message composer.
+- Existing C broadcast chat remains unchanged.
+- D packets retain SOURCE+SEQ dedupe and TTL relay semantics; only the destination displays the message.
+
+INTEROPERABILITY BOUNDARY
+- DIRK does not label its custom packets as Meshtastic or MeshCore traffic.
+- Meshtastic and MeshCore devices are discoverable/friendable in DIRK v0.6.1.
+- Genuine Meshtastic/MeshCore messaging still requires their real companion/upstream protocol adapter. The UI now has protocol-aware routes and data structures for those adapters rather than faking on-air compatibility.
+- Full Meshtastic remains available via the meshtastic-adv sidecar workflow in tools/fetch-meshtastic-adv.sh.
+
+FIRST HARDWARE TESTS
+1. Open LoRa -> Nearby Mesh and verify the screen no longer pulses every 500 ms.
+2. Confirm native DIRK nodes appear with D and Meshtastic/MeshCore companion radios appear with M/C when in BLE range.
+3. Favorite a peer, reboot, and verify it remains under Contacts.
+4. With two DIRK Mesh devices, select a D peer profile and send a direct message.
+5. Leave Chats open for 20-30 seconds and verify the screen remains visually stable when no messages arrive.

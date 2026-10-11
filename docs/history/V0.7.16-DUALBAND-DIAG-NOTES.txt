@@ -1,0 +1,14 @@
+DIRK v0.7.16 — source test candidate
+Baseline: user confirmed DIRK v0.7.15 unified AP scanner archive.
+
+- No scanner band selection: shows AUTO 2.4+5, inspect preference remains L/R.
+- No meaningless band selection in saved targets or probe monitor.
+- Preserve C5 SSID names on refresh from the SAME 5 GHz BSSID when JanOS
+  sends a blank/placeholder SSID; distinct BSSIDs are never merged on a guess.
+- 5g diagnostics page 5/5 lists actually received recent SSIDs and exact
+  2.4 GHz-name match status, with CH, RSSI and name length.
+- Byte-for-byte protected radio providers and CSV parser, GPS, BLE preserved.
+- Native host regression tests passed; hardware/PlatformIO NOT tested here.
+
+Please take pictures of 5G diagnostics page 5/5 while scanning the two
+known dual-band SSIDs so we can distinguish AP visibility from name merging.

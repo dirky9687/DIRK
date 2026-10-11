@@ -1,0 +1,12 @@
+DIRK v0.7.16 FIX1 - C++ compile blocker correction
+
+User build error: src/ui/Ui.h: cannot bind WifiTarget& (non-const) to const WifiTarget from UnifiedApView::preferred().
+
+Changed only src/ui/Ui.h scanner selection: keep const preferred selection; resolve its ID using TargetManager::byId() to obtain a mutable live WifiTarget for S3WifiProvider::inspect(). Only attempted for Band24, never MonsterC5/5 GHz. No cast, changes to scanner, parser, or radio setup.
+
+Regression tested with local g++/Python host tests. Full PlatformIO and Cardputer ADV hardware build require your Kali PlatformIO environment.
+
+Build on Kali (from extracted firmware directory):
+    pio run -e cardputer-adv
+
+The previous build can report multiple object-file errors from the same Ui.h header; those should clear with this correction.

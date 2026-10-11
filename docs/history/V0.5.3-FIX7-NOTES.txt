@@ -1,0 +1,30 @@
+DIRK v0.5.3-FIX7
+=================
+
+Primary purpose: restore reliable ESP32-S3 2.4 GHz discovery for hardware diagnosis.
+
+Changes
+-------
+- Restored the proven v0.3.9 synchronous WiFi.scanNetworks(false,true,false,300) scan path.
+- Removed the FIX6 FreeRTOS Wi-Fi scan worker from the actual scan path.
+- Before each S3 scan, DIRK now:
+  * disables promiscuous mode,
+  * deletes stale scan data,
+  * disables STA auto-reconnect,
+  * disconnects without erasing saved credentials,
+  * power-cycles Wi-Fi mode OFF -> STA,
+  * allows the radio to settle before scanning.
+- Added S3 lastScanCode() diagnostics. When Recon finds no APs the screen shows the raw scan result.
+  * 0 means the driver completed a scan but reported zero APs.
+  * negative values indicate a scan/driver state failure.
+- Recon uses the synchronous provider path directly and refreshes repeatedly.
+- Recon live entries expire after 12 seconds if not rediscovered.
+- Wardrive 2.4 GHz also uses the same proven synchronous S3 scan path.
+- Wi-Fi and BLE remain strictly time-sliced during wardrive.
+- MonsterC5 5 GHz remains independent over the Grove UART path.
+- Transparent ASCII wardrive buddy from FIX6 is retained; no gray chassis rectangle.
+- Miles/kilometers setting and GNSS-derived distance behavior are retained.
+
+Diagnostic tradeoff
+-------------------
+This release can briefly pause UI animation during a 2.4 GHz sweep. That is intentional. The goal is to prove the known-good radio scan path on hardware first; once AP discovery is verified, scanning can be optimized without changing radio ownership/state semantics.

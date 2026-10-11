@@ -1,0 +1,35 @@
+# PlatformIO / local toolchain
+.pio/
+.pioenvs/
+.piolibdeps/
+.vscode/
+.idea/
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Local accounts, secrets and sensitive reconnaissance records
+.env
+.env.*
+secrets.h
+credentials.h
+secrets.json
+credentials.json
+*.pem
+*.key
+*.pcap
+*.pcapng
+*.log
+*.csv
+*.jsonl
+*.kismet
+*.kismet.csv
+*.sqlite
+*.db
+
+# Firmware output belongs in GitHub Releases
+*.bin
+*.elf
+*.map

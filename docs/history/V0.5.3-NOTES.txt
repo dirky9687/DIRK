@@ -1,0 +1,33 @@
+DIRK v0.5.3 beta-flush pass
+
+Navigation / menus
+- Main menu now keeps Network Tools under Wi-Fi instead of as a top-level module.
+- Wi-Fi toolkit is a scrolling viewport; entries can no longer fall off the bottom.
+- Wi-Fi no longer exposes separate Blue Team / Red Team category labels.
+- Blue is the default/passive workflow. Red-only entries appear only while global team mode is Red in Settings.
+- Bluetooth follows the same mode-aware approach; the authorized lab is hidden in Blue mode.
+
+Wi-Fi / BLE
+- Wi-Fi root: recon, analysis, capture, network tools, defensive monitor, saved targets, optional Red-mode authorized tests/lab, and 5 GHz diagnostics.
+- Defensive monitor remains passive.
+- Red-mode active validation remains saved + explicitly authorized + single-target only.
+- Added bounded 3-frame disassociation validation beside the existing bounded deauth validation.
+- Added target-scoped raw PCAP capture option.
+- Active capture/validation is stopped when leaving the authorized-test screen.
+- Authorized lab contains a five-second bounded beacon burst and non-secret captive-portal test page; portal stops when leaving the lab.
+
+Main modules
+- Captures: SD-backed capture browser with file size, detail view, text/binary metadata and two-step delete.
+- Audits: SD-backed target-report browser using reports saved from target detail.
+- Sessions: wardrive session browser with session stats/WiGLE presence in the detail view.
+- Files: rooted /dirk SD browser with safe folder traversal, text preview and two-step file delete.
+
+Wardrive
+- Display dim/black timeout is inhibited while a wardrive run is active and restored automatically afterwards.
+- Speech bubble is cached between animation frames; the world clears around it instead of erasing/repainting it every frame.
+- Bubble text wraps to 16-character lines so the dynamic box never clips its copy.
+- Existing persistent career XP / rank storage remains intact.
+
+Safety boundary
+- No mass deauth, jammer, indiscriminate BLE spam, crash payloads, or automatic multi-target attacks were added.
+- Active Wi-Fi validation remains gated by Red mode plus a saved/authorized target and hard frame limits.

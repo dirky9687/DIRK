@@ -1,0 +1,11 @@
+DIRK v0.3.4 UI + POST overlay
+Baseline: working v0.3.3 tree (keyboard + AP scan + redraw fix retained)
+Changes:
+- Main menu moved flush left.
+- Persistent DIRK logo on right with selection-specific icon beneath.
+- Matrix texture confined to narrow gutters; never under menu text.
+- Existing contextual hotkey footer retained.
+- Splash rebuilt as unobstructed hero artwork first.
+- Hardware POST results now appear one at a time in a compact lower card.
+- Final SYSTEM READY transition before UI.
+- No changes to InputManager or S3 Wi-Fi scan backend.

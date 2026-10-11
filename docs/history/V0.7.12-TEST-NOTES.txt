@@ -1,0 +1,52 @@
+DIRK v0.7.12 — BLE Wardrive Telemetry + Post-Wardrive Menu Smoothing
+========================================================================
+Base: hardware-proven DIRK v0.7.11-C5-CSV-PARSER-FIX
+
+User reported:
+- 5 GHz discovery is NOW WORKING: absolutely preserve the MonsterC5 CSV parser, scanner,
+  UART transport, all source unchanged from v0.7.11.
+- Missing BLE count on the tank screen footer.
+- Matrix menu panel animation judders after leaving Wardrive, even after Ending Session.
+- Broader menus/organization need review and decluttering.
+
+Changes in this release:
+- UI only: tank footer now includes per-session BLE unique-address count, using
+  WardriveStats.uniqueBle already collected by the existing scanner.  Shows BLE:--
+  when BLE was disabled for the session.  Keeps 2.4, 5, and GPS fields.
+- UI only: dedicated 240x81 tank animation sprite is allocated on entering the
+  live Wardrive tank view and freed on leaving it. The 111x98 Matrix-menu sprite
+  is now NEVER destroyed/recreated on Wardrive/menu transitions. Prior releases
+  repurposed this same sprite for two sizes, possibly fragmenting the heap or
+  failing reallocation and forcing direct LCD rendering. If the separate tank
+  allocation fails, the existing full-scene canvas fallback is retained.
+- Screen title 'wardrive // recon' -> 'wardrive // hub' to better reflect
+  start/stop, statistics, providers and GPS diagnostics under this submenu.
+  Other tools retain their current menu positions during stabilization.
+- Version labels updated to 0.7.12 in splash, module UI, session JSONL and
+  WiGLE CSV metadata.
+- Wardrive End Session behavior, Buddy sounds, XP ledger, GPS provider,
+  Wi-Fi 2.4 GHz driver, BLE provider, target manager, MonsterC5 providers
+  are otherwise untouched.
+
+Validation done offline:
+- All 8 protected provider/target/XP files are byte-for-byte identical to v0.7.11.
+- 13 static checks cover the menu buffer, separate tank lifecycle, BLE status,
+  and preservation of stop behavior.
+- 10 existing native C++ MonsterC5 CSV parser cases passed.
+- ZIP structure and CRC tested.
+Not done: Full PlatformIO compilation or test on Cardputer ADV hardware.
+
+Important tests after flashing:
+1. Menu animations BEFORE Wardrive, DURING Wardrive then after selecting End Session.
+2. Start Wardrive with BLE ON; check bottom counts for 2.4, 5 and BLE increase.
+3. Start Wardrive with BLE OFF; check BLE:-- rather than 0 or stale count.
+4. Back out of tank while Wardrive remains running; background mode still allowed.
+5. Wardrive > End Session; ensure the home WD BG ACTIVE label clears and
+   menu Matrix animation continues smoothly for several minutes.
+6. Confirm MonsterC5 5 GHz still detects a known 5 GHz AP and GPS remains fixed.
+
+Menu cleanup planned for subsequent release AFTER this isolated UI test:
+- Organize user workflow into Scan/Recon, Wardrive & GPS, Network/Radio tools,
+  Logs/Progress, and Settings/Diagnostics with concise labels.
+- Preserve direct-access tools and Blue/Red Team distinction; propose final
+  menu map before moving existing navigation targets.

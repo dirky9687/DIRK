@@ -1,0 +1,13 @@
+DIRK v0.5.3-FIX3
+
+Hardware regression fixes:
+- 2.4 GHz Recon now scans one channel at a time asynchronously and progressively populates the live list.
+- Recon no longer clears unsaved targets before each async scan; reconEpoch hides stale/saved-only entries.
+- Fixed Recon target selection to use the live Recon index rather than the full band list index.
+- Wardrive explicitly time-slices ESP32-S3 Wi-Fi and BLE scans instead of overlapping them.
+- Wardrive 2.4 GHz scans cycle channels continuously while MonsterC5 5 GHz remains independent.
+- Wardrive buddy/header region is double-buffered with M5Canvas to remove black rectangles/tearing.
+- ASCII buddy uses transparent glyph rendering over the moving terrain.
+- Speech bubble uses a themed dark fill and is composited in the off-screen frame.
+- Distance is derived only from GNSS breadcrumb fixes, with satellite/HDOP/jump filtering; animation position never affects distance.
+- GPS speed/course are exposed in GpsFix; wardrive HUD shows GPS speed.

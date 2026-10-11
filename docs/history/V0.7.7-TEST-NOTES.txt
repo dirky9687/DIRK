@@ -1,0 +1,14 @@
+DIRK v0.7.7 – regression triage TEST BUILD
+
+Based on the v0.7.6 source. Menu animation preserved.
+- Wardrive no longer performs a blocking synchronous FIX7 scan when an async scan fails; it publishes WIFI_SCAN_FAILED so the next async interval retries. Outside Wardrive, synchronous fallback remains.
+- For the first 11 seconds after session initialization, BLE starts are deferred to give 2.4 GHz scan priority on the shared S3 radio.
+- Live Wardrive screen: rank and XP bar expanded; redundant top RF/GPS line removed; small counters moved to bottom HUD.
+- Wardrive animation interval set to 95ms (about 10.5fps) to lower SPI contention and prioritize polling/scanning.
+- Sleep inhibition now changes the display brightness only when entering the inhibited state; it used to call applyBrightness() on EVERY UI loop.
+- GPS UART parser can drain up to 1024 bytes or 2.3ms of data each update. Does not pretend to fix GPS antenna/serial connection.
+- C5/JanOS protocol unchanged; existing 5GHz UART diagnostics retained.
+
+This is source-only, not yet confirmed by a full PlatformIO build or hardware tests.
+Before blaming hardware, record GPS Diagnostic RX/NMEA numbers and 5G Diagnostic UART RX/raw lines.
+Radio count legend: 2: number seen in this session; ~ while scanning; ! last scan failed.

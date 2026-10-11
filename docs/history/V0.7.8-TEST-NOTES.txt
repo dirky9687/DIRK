@@ -1,0 +1,28 @@
+DIRK v0.7.8 - WARDRIVE LIVE VIEW LAYOUT TEST
+==============================================
+Based on v0.7.7 working 2.4GHz build.
+
+Changes
+-------
+- Removed level, rank and XP progress strip from the live Wardrive tank screen.
+  Career XP/rank logic and Operator Dossier / Wardrive Stats remain intact.
+- Dedicated scene area y=19..99; static RF/GPS one-line status y=100..116.
+- Repositioned buddy, tank and scenery to fit without cutting off the cat head.
+- Animated only 240x81 scene sprite; updated telemetry independently once/s.
+- Kept existing working menu and 2.4GHz scanner source unchanged.
+- Kept existing GPS provider, C5 protocol, and four-page 5GHz / two-page GPS diagnostics unchanged.
+
+Important - radios are not repaired by this version
+---------------------------------------------------
+The C5 is a separate ESP32-C5 running JanOS. Cardputer ESP32-S3 has no native
+5GHz reception. DO NOT assume a 5GHz network has been scanned without C5 RX
+bytes and successfully parsed records. On the 5G Diagnostics screen, start a
+scan and record all pages including UART RX bytes, raw UART line and rejection
+counts.
+
+On the GPS Diagnostics screen, outdoors with the LoRa/GPS Cap, record UART RX
+bytes, NMEA/valid checksums, satellite count, last raw NMEA and any fix age.
+If no bytes are received at 115200, try the diagnostics-only 9600 option.
+Neither zero satellites nor an unavailable fix alone proves GPS hardware failure.
+
+Hardware testing is required. This is an uncompiled source-level candidate.

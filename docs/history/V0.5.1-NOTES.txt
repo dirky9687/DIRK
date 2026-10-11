@@ -1,0 +1,32 @@
+DIRK v0.5.1 - Smoothness + Persistent Progression
+
+Focus of this pass:
+- Preserve the v0.5.0 Wardrive buddy behavior/movement while removing scan-driven UI stalls.
+- Make wardrive entry responsive immediately instead of waiting on session-file setup.
+- Reduce full-screen redraw/flicker on the Wardrive buddy view.
+- Reduce splash-screen flashing by keeping the DIRK foreground artwork static.
+- Persist lifetime Wardrive XP/rank across reboots.
+
+Wardrive performance changes:
+- ESP32-S3 2.4 GHz wardrive scans now use the Arduino Wi-Fi asynchronous scan path.
+- BLE wardrive scans now use the asynchronous BLE scan callback path.
+- MonsterC5/JanOS remains asynchronous on its independent Grove UART.
+- Wardrive session directory/header creation is staged after the first buddy frame appears.
+- The buddy screen refreshes only its dynamic y=19..116 region at ~70 ms cadence; the global header/footer are retained.
+- Regular XP persistence is throttled so storage writes do not happen on every discovery.
+
+Progression persistence:
+- Lifetime XP is stored in ESP32 NVS namespace 'dirk-wd'.
+- Level/title are derived from persisted XP on startup.
+- A human-readable mirror is written to /dirk/wardrive/config/progression.json on level-up/stop.
+- Per-session discovery/distance stats still reset for each new wardrive run.
+
+Splash smoothness:
+- The DIRK logo/dirk foreground is rendered once at boot and preserved.
+- Matrix animation only clears/redraws exposed background regions around the foreground.
+- Hardware-status animation delay shortened while avoiding full-screen clears.
+
+Hardware target:
+- Cardputer ADV / ESP32-S3
+- GPS: LoRa/GPS Cap on GPIO15/13
+- MonsterC5: Grove/HY2.0 UART on GPIO1/2

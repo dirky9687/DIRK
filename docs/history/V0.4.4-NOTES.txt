@@ -1,0 +1,15 @@
+DIRK v0.4.4
+
+Hardware-focused refinement pass from v0.4.3.
+
+- Splash foreground remains silhouette + DIRK wordmark only; live matrix remains visible behind it.
+- Red splash colored accents normalized to red; Blue splash colored accents normalized to blue/cyan.
+- Matrix streams use varied per-column speeds, offsets and glyph evolution while falling downward.
+- Menu DIRK mark keeps its red accent in Red Team and remaps red-dominant accent pixels to blue/cyan in Blue Team.
+- Menu labels and hotkey/footer labels changed to lowercase for cleaner bracket typography.
+- 5 GHz scan lifecycle no longer clears unrelated targets or clears C5 results while a scan is still in progress.
+- Target identity is now BSSID + band so the same MAC cannot collapse 2.4 GHz and 5 GHz records together.
+- AP Inspect holds target ID rather than a mutable array index.
+- 5 GHz empty-state UI differentiates link-waiting, scanning, and no-AP results.
+- 5 GHz diagnostics carries v0.4.4 / c5p2 marker.
+- Existing Red Team authorization boundaries and bounded active tests unchanged.

@@ -1,0 +1,63 @@
+DIRK v0.7.2 - C5 / UI / audio candidate (source ZIP)
+====================================================
+Base: DIRK v0.7.1-AUDIT-FIX source, preserving previous FIX8 async S3 scanner.
+
+1) UI / stutter
+- The main menu's animated right panel is composed in a 111x98 16-bit M5Canvas sprite.
+  One rectangular blit replaces hundreds of directly visible TFT draw calls.
+  When there is not enough RAM for the small sprite, the old draw is retained.
+- Wardrive animation frames are paced at 90 ms, matching the buddy and world
+  motion's 90 ms timebase, avoiding uneven duplicate/advanced frame cadence.
+- 5GHz recon/spectrum/monitor no longer force whole-screen redraws on a fixed
+  500 ms timer. They redraw on C5 scan/result changes and rate-limit updates.
+- Removes a forced NVS XP-save call from the level-up hot path (regular delayed
+  save and stop-time save remain in place).
+
+2) Wardrive buddy sound
+- The tone service now runs only while actively viewing Wardrive pages 23..27,
+  and only while a run is active and sound is enabled.
+- Queued tones are cleared and currently playing output is stopped when leaving
+  Wardrive, disabling sounds or stopping the session. Wardrive can keep logging
+  silently in the background.
+- Speaker master volume is temporarily set to half its current numeric level
+  for buddy tones, then restored when exiting the active buddy sound view.
+
+3) MonsterC5 JanOS 5GHz scans
+- Uses `scan_networks` first, with `scan` fallback after unsuccessful requests;
+  no UART banner can permanently suppress the fallback.
+- Prevents overlapping repeated C5 scans; minimum start cadence ~11 seconds.
+- Retains latest 5GHz APs in recon for 45 seconds across views / scan gaps.
+- Parser accepts JSON-keyed MAC, SSID, channel/frequency and RSSI; rejects
+  missing/invalid channel and RSSI rather than inventing a 5GHz observation.
+- Fixed SSID field matching bug: `ssid` inside `bssid` no longer hijacks the
+  parsed SSID in JSON records.
+- Wardrive attempts its selected 5GHz scan even if boot-time ping did not
+  produce a known JanOS response.
+- `ready` means confirmed JanOS response, scan event or parsed AP, not any UART
+  data. 5GHz Diagnostics distinguishes link, results and rejected records.
+- 5GHz Diag: Enter ping, Tab start scan, Left/Right select page 1 or 2.
+  Page 1: link, scan status, parsed/rejected, UART loss counters, last TX/RX.
+  Page 2: reasons for rejected UART records (MAC/channel/RSSI).
+
+Validation in this environment:
+- clang++ -std=c++17 mock-transport test PASSED for scan command and AP parsing.
+- ZIP checked for integrity.
+- No PlatformIO/ESP32 toolchain available here; firmware has NOT been compiled
+  or run on Cardputer ADV / MonsterC5 hardware.
+- No claim that upstream JanOS implements the exact return format that this
+  parser expects. Inspect 5GHz Diagnostics raw RX and counters on device.
+
+Suggested hardware test:
+1. Use an intentionally broadcast test SSID on 5GHz channel 36, 40, 44 or 48.
+2. Open Wi-Fi > 5G diagnostics. Press Tab and wait 15-25 seconds.
+3. Note LINK, SCAN, 5G parsed, REJ, DROP, LONG, the last TX and RX line.
+4. Press Left/Right to inspect the rejected-MAC/channel/RSSI counters.
+5. Open 5GHz AP scanner and verify the known test SSID appears.
+6. Start Wardrive and leave it via Back: logging should continue silently.
+   Re-enter to hear tones at reduced volume; disable sound to confirm silence.
+7. Check menu and tank animation while SD recording and radio scans are active.
+
+If RX is zero: check UART wiring, MonsterC5 power and JanOS serial settings.
+If RX is nonzero but 5G parsed = 0: raw protocol, rejected fields, JanOS firmware,
+C5 channel coverage and antenna all remain possible causes.
+If 5G parsed > 0 but not displayed: check the current screen's band selector.

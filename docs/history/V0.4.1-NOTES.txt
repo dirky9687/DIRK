@@ -1,0 +1,20 @@
+DIRK v0.4.1 — Safe/UI pass
+
+This archive is based on the uploaded current build and focuses on the requested UI/diagnostic corrections without expanding aggressive testing behavior.
+
+Main changes:
+- Splash updated for Cardputer ADV fit (240x135) with new red/blue team artwork treatment.
+- Splash footer updated to v0.4.1.
+- Menu DIRK mark isolated into its own panel and drawn with transparent black keying.
+- Home background matrix effect made denser / more animated.
+- Footer hints shortened to avoid text wrapping.
+- Wi-Fi scans now refresh continuously on the passive scan pages until you back out.
+- Spectrum analyzer now refreshes continuously and uses decay/smoothing rather than single-shot bars.
+- Probe / deauth passive monitor pages now auto-sample until stopped.
+- Added 5G Diagnostics page to inspect UART/JanOS/C5 state, byte counts, line counts, last TX/RX, and parsed records.
+- JanOS/C5 transport instrumentation added to support 5 GHz troubleshooting.
+
+Notes:
+- This pass intentionally does NOT widen active testing intensity.
+- 5 GHz scan success still depends on MonsterC5 / JanOS actually responding over UART on the hardware.
+- If the menu mark transparency overload causes a compile issue with your installed M5GFX version, tell me the exact compiler error and I will patch that call to a compatibility-safe custom blit.

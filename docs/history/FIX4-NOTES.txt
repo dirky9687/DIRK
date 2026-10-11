@@ -1,0 +1,6 @@
+DIRK v0.5.3-FIX4
+
+Compile fix for FIX3 M5Canvas rendering path:
+- Converted the shared wardrive/header drawing helpers used by both M5GFX display and M5Canvas sprite rendering into templated drawing helpers.
+- This resolves the compile errors caused by trying to bind an M5Canvas object to M5GFX& parameters.
+- No intentional behavioral changes beyond restoring the FIX3 off-screen wardrive rendering path.

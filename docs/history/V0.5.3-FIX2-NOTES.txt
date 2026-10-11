@@ -1,0 +1,9 @@
+DIRK v0.5.3 FIX2
+
+Hardware-test fixes:
+- Wardrive START no longer appears dead when "require GPS fix" is enabled before a fix exists. The session starts immediately and waits for valid GPS before writing geolocated records.
+- Wardrive setup now displays an explicit start error if SD/provider prerequisites fail.
+- Recon AP scanner now shows only APs actually observed since entering the current Recon scan view. Saved APs are not displayed merely because they exist in saved.csv; a saved AP appears with '*' only when it is currently rediscovered.
+- 2.4 GHz UI scanning moved to the ESP32 asynchronous scan path to prevent multi-second menu stalls.
+- Removed bottom description lines that overlapped/cut off scrollable Wi-Fi/Wardrive menu rows.
+- Existing Red Team authorization gates and bounded active tests are unchanged.

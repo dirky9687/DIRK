@@ -1,0 +1,54 @@
+DIRK v0.6.5 — Combined 0.6.4 + 0.6.5 Test Build
+=================================================
+
+Base: v0.6.3-FIX1 (smooth double-buffered UI / FIX8 Wi-Fi scan architecture)
+
+INFRARED
+- New top-level Infrared menu with a dedicated animated DIRK side-panel icon.
+- Uses the Cardputer ADV built-in IR emitter on GPIO44.
+- NEC sender with address/command controls.
+- SD replay from /dirk/ir for the first supported Flipper-style signal in a .ir file:
+  * parsed NEC / NECext
+  * raw timing data with carrier frequency + duty-cycle parsing
+- IR diagnostics screen shows TX readiness, carrier, duty, sent-frame count, and RX limitation.
+- No false receive claim: the Cardputer ADV provides an onboard emitter; IR capture/learning requires external RX hardware.
+
+BLUE GUARD / WI-FI PASSIVE INTELLIGENCE
+- New Blue Guard dashboard under Wi-Fi > defensive monitor.
+- Save current RF environment to /dirk/blue/baseline.csv.
+- Automatic passive comparisons after meaningful 2.4 GHz scan changes.
+- Detects and lists:
+  * new AP/BSSID
+  * missing baseline AP
+  * security/authentication changes
+  * channel changes
+  * PMF capability/requirement changes when observed
+  * SSID changes for a known BSSID
+  * a new BSSID advertising a baseline SSID (heuristic; can be legitimate mesh/roaming)
+- Passive AP inspector now records beacon interval, DTIM period, country information, HT/VHT/HE capabilities and WMM when present in management IEs.
+- Target reports saved to SD include the extended passive-management-frame metadata.
+
+BLE PASSIVE ANALYZER
+- Advertisement records now retain advertised TX power, manufacturer ID, appearance and primary advertised service UUID where available.
+- Passive classification for iBeacon, Eddystone, Meshtastic and MeshCore advertisements.
+- Expanded BLE target detail, analysis, and defensive summary screens.
+- No GATT connection or active probing was added to Blue mode.
+
+PRESERVED
+- v0.6.3-FIX1 full-body M5Canvas buffering and smooth menu animations.
+- FIX8 asynchronous Wi-Fi scanner/reset/fallback behavior.
+- v0.6.1 mesh event-driven UI and multi-mesh contact framework.
+- v0.6.2 GPS-synchronized clock, date-aware DST and battery percentage header.
+- Existing Red-mode authorization gates and hard-limited active Wi-Fi tests.
+
+FIRST TESTS
+1. Compile and boot normally; confirm splash reaches SYSTEM READY.
+2. Scroll all ten main-menu entries and verify the new Infrared icon/panel does not flash.
+3. Infrared > diagnostics should show GPIO44 and TX ready.
+4. Infrared > NEC transmitter: test only on a device you own.
+5. Put Flipper-compatible .ir files in /dirk/ir and test NEC/raw playback.
+6. Wi-Fi > defensive monitor > scan + compare, then save current baseline.
+7. Move/change an AP or compare in another location and inspect Blue Guard alerts.
+8. Open a 2.4 GHz AP > target detail > Tab to passively inspect beacon IEs; use Left/Right for the second page.
+9. Bluetooth > recon/analysis/defensive and verify advertisement metadata/classification.
+10. Re-test Wi-Fi scan, wardrive, LoRa messaging, time/battery header and menu animation for regressions.

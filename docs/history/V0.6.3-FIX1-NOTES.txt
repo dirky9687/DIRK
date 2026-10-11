@@ -1,0 +1,29 @@
+DIRK v0.6.3-FIX1
+=================
+
+Compile fix
+-----------
+The v0.6.3 UI buffering pass routed the existing M5Canvas back buffer through
+renderActive(), but renderActive() and the older UI drawing helpers still took
+M5GFX&. M5Canvas is an LGFX_Sprite, not an M5GFX display object, so PlatformIO
+correctly rejected calls such as renderActive(*wdCanvas, ...).
+
+FIX1 changes the shared UI drawing surface parameters to lgfx::LGFXBase&.
+Both the physical M5GFX display and M5Canvas/LGFX_Sprite implement that common
+drawing base, so the same render path can target either surface without casts
+or duplicated screen renderers.
+
+Preserved
+---------
+- v0.6.3 full-body off-screen buffering and atomic canvas push.
+- Main/section DIRK Matrix panels and redesigned section icons.
+- v0.6.3 footer cleanup.
+- Date-aware DST logic and v0.6.2 GPS/battery header services.
+- FIX8 Wi-Fi scan architecture.
+- v0.6.1 mesh architecture.
+
+Validation
+----------
+Archive structure, source delimiter balance, and the render-target type path
+were checked in the packaging environment. The authoritative ESP32/Cardputer
+PlatformIO compile remains the cyberdeck build.

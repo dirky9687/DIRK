@@ -1,0 +1,11 @@
+DIRK v0.4.5 - splash visual/pacing pass
+
+- Red splash foreground is strictly red/crimson + neutral highlights; stray blue/green accent colors removed.
+- Blue splash foreground is strictly blue/cyan + neutral highlights; no red accent contamination.
+- Both foreground masks now use a solid opaque hood/silhouette region so Matrix rain cannot bleed through pinholes in the figure.
+- Blue silhouette gains stronger hood-edge and inner-fold definition while retaining the no-heart/no-knife design.
+- Red silhouette retains heart/knife detail with improved contrast.
+- Splash Matrix workload reduced (fewer columns/trail cells), redundant full-screen clear removed, and boot-check animation reduced to two frames per check to minimize visible stutter.
+- Matrix glyph pool uses lower-case characters/symbols and continues falling downward with staggered stream speeds.
+- Menu/hotkey/help typography normalized toward lower-case, including status labels and common action prompts.
+- Existing v0.4.4 5 GHz target isolation and C5 scan handling retained.

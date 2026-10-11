@@ -1,0 +1,43 @@
+DIRK v0.7.11 — MonsterC5 5 GHz CSV decoder test
+=================================================
+Base: DIRK v0.7.10-WARDRIVE-STOP-TEST.zip
+
+Evidence from the user's hardware diagnostic video:
+- C5 UART RX receives JanOS records at 115200 baud.
+- JanOS READY and scan events were observed.
+- Candidate AP records contain quoted comma-separated fields:
+  SSID, BSSID, channel, authentication, RSSI, band.
+- Example showed 5 GHz channel 153 and RSSI -93, but DIRK 5g count stayed 0;
+  the bad-channel rejection count climbed.
+
+Root cause addressed:
+- Previous adapter only extracted named 'channel' and 'rssi' text fields.
+- Quoted CSV data had a recognizable BSSID but no named fields, so valid
+  observations were rejected before reaching the Wi-Fi target manager.
+
+Changes:
+- Adds src/providers/c5/C5CsvApParser.h (bounded, native-testable CSV parser).
+- Decodes a JanOS CSV scan row, including quoted commas in SSIDs, proper MAC
+  validation, band/channel checks, and the channel/RSSI/security values.
+- Falls back to existing named-field parser for non-CSV records.
+- Wi-Fi > 5G Diagnostics > page 2 reports CSV rows decoded.
+- Includes tools/test_c5_csv_parser.cpp and native C++11 test command below.
+- No edits to GPS, S3 Wi-Fi 2.4 GHz, BLE, XP ledger, Wardrive, audio, or the
+  v0.7.10 End Session logic.
+
+Native parser test:
+  g++ -std=c++11 -Wall -Wextra -Werror tools/test_c5_csv_parser.cpp -o /tmp/dirk_c5_test
+  /tmp/dirk_c5_test
+
+PlatformIO:
+  pio run -e cardputer-adv
+
+Test:
+  Wi-Fi > 5G Diagnostics, Tab to scan, allow 20+ seconds.
+  Read page 1: 5g accepted, 2g filtered and reject count.
+  Read page 2: CSV rows decoded, scan starts/completions and event.
+  Read page 3: raw AP candidate, if accepted count remains 0.
+  Check the 5G scan list for the SSID and channel of received rows.
+
+Hardware validation and complete PlatformIO compilation are still pending.
+The MonsterC5 is 2.4/5 GHz, not 6 GHz. 6 GHz APs are not detectable.

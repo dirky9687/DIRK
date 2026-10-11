@@ -1,0 +1,20 @@
+DIRK v0.4.7 VISUAL / WARDIVE BUDDY PASS
+
+Splash
+- Removes the hooded-skull splash direction from v0.4.6.
+- Reuses the proven DIRK menu wordmark as the splash centerpiece.
+- Enlarges the wordmark for the native 240x135 Cardputer ADV display.
+- Blue Team keeps the same mark with blue/cyan accent remapping.
+- Red Team keeps the same mark with red accents plus a horizontal dirk drawn through the logo.
+- Matrix rain remains behind the logo and footer area stays reserved.
+
+Wardrive UI
+- Replaces the small static tank with a tracked DIRK recon buddy.
+- Adds idle bobbing, blinking, animated treads, antenna movement impression, cannon/telescope recoil and discovery flash.
+- Adds speech bubbles with rotating playful recon/war-style quips.
+- Discovery bubbles show event text and XP gained.
+- Wardrive buddy view refresh increased to ~280 ms while list/map/stats retain slower refresh.
+- 5 GHz HUD shows -- when MonsterC5 is not active instead of a misleading zero-count radio state.
+
+Wardrive logging/provider work from v0.4.6 remains intact.
+FIX1 radians()/Arduino macro collision fix is retained.

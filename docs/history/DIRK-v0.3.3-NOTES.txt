@@ -1,0 +1,23 @@
+DIRK v0.3.3 UI + Wi-Fi Foundation overlay
+Built against the uploaded WORKING-HARDWARE v0.3.2 tree.
+
+Changes:
+- Preserves the proven ADV TCA8418 keyboard implementation.
+- Removes 140 ms full-screen animation invalidation that caused TFT pulsing/flicker.
+- Matrix texture is denser, static, and restricted to UI margins.
+- Tightens splash/status layout and labels MonsterC5 as UART presence only.
+- Adds Wi-Fi band selector UI: 2.4 S3 / 5G C5.
+- 2.4 GHz remains the real ESP32-S3 scan path.
+- 5 GHz never fakes results: it reports C5 presence and waits for verified JanOS command/response support.
+- Selecting a 2.4 GHz AP now opens a real target detail screen.
+- Target detail supports Save Target and explicit Authorized Test Target state.
+- Active-operation boundary remains RED mode + saved + authorized.
+- TAB rescans 2.4 GHz; LEFT/RIGHT changes band view.
+- Version display updated to v0.3.3.
+
+Not added in this overlay:
+- Deauthentication transmission
+- EAPOL/PMKID/handshake capture engine
+- BLE scan workflow
+- JanOS 5 GHz command execution
+These require separate verified providers rather than fake menu actions.

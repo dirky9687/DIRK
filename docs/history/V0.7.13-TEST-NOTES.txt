@@ -1,0 +1,25 @@
+DIRK v0.7.13 - Wardrive Exit/Menu Frame Pacing + BLE Status (SOURCE TEST BUILD)
+
+Baseline: v0.7.12; keeps the confirmed v0.7.11/0.7.12 5 GHz MonsterC5 UART, JanOS scan and CSV parser byte-identical.
+
+Changes
+1) Eliminates tankCanvas allocation/deallocation on live Wardrive screen transitions. Reuses the preallocated 240x117 general display canvas with a clip for the moving region. The independent Matrix menu sprite stays untouched. No modification to tank artwork/radio detection code.
+2) Explicit 2.4, 5, BLE and GPS status on Wardrive bottom row. BLE count is number of session-unique BLE devices, not number of scan cycles. -- means BLE disabled; 0 means enabled with zero discoveries. Compact layout retains spelled-out BLE even for large counts.
+3) Clearing stale Wardrive animation/telemetry timer state when End Session is selected. Session logging, XP credit, GPS and scan code unchanged.
+4) Display/version/log metadata updated to v0.7.13.
+
+What this does NOT change
+- Does not modify any C5 UART transport, 5 GHz scan command or CSV parsing source.
+- Does not change the Wi-Fi S3, BLE or GPS provider source, or Buddy XP ledger logic.
+- Does not reorganize menus or implement unified SSID-based AP grouping; keep those for a separate controlled pass after checking the exit-stutter regression.
+- Does not guarantee smoothness under intentional background wardriving: scans and SD logging remain active when exiting WITHOUT selecting End Session.
+
+Test after flashing
+A) Reboot -> enter Wi-Fi/Settings/menus: observe Matrix panel motion.
+B) Start Wardrive with BLE on. Confirm bottom line includes BLE:0 or higher, and both 2.4G and 5G continue discovering.
+C) Back from tank screen -> home: WD BG ACTIVE should be visible; some competition with scans is expected while session is running.
+D) Go to Wardrive > End Session, wait for log flush to finish, return home: the menu should no longer experience heap churn from repeatedly entering/leaving the tank.
+E) Repeat B-D three times. Observe whether menu stutter accumulates across sessions.
+
+Validation
+Source comparisons and native C5 CSV parser regression test passed. Full PlatformIO compilation and Cardputer ADV hardware test are NOT performed here.

@@ -1,0 +1,7 @@
+DIRK v0.7.9 - GPS state + persistent XP triage
+
+Based on v0.7.8; no modifications to C5 protocol or S3 2.4GHz scan provider.
+GPS: video showed valid six-satellite fix at 115200 baud, then no valid NMEA after manual test at 9600. Tab now refuses to change baud while a valid fix exists or while Wardrive runs; exiting GPS diagnostics restores the official 115200 baud. Shared header displays gN for live fix, and partial header updates when GPS state changes.
+XP: session sightings/logging unchanged, discovery XP and milestones awarded only for first lifetime occurrence of each WiFi BSSID/BLE address. On-SD exact registry at /dirk/wardrive/config/xp-contacts/XX.bin, no PSRAM requirement, on-demand bucket reads and paced XP checks + flushing. If SD fails, fail closed (no XP). Existing NVS XP is untouched. Optional one-time migration tool seeds the new registry from prior Wardrive session logs (does not adjust old XP).
+5GHz: remains unresolved until UART RX diagnostics or independent C5/JanOS scan confirms hardware/protocol.
+NOT COMPILED OR HARDWARE-VERIFIED BY ASSISTANT.

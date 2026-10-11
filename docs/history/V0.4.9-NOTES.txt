@@ -1,0 +1,14 @@
+DIRK v0.4.9
+
+Visual / wardrive polish pass:
+- Splash uses the menu DIRK mark as the single source of truth.
+- Splash mark scales to 156x51 instead of crude 2x blocks.
+- Blue mode recolors only red-dominant accent pixels; neutral logo detail stays neutral.
+- Red splash replaces the long sword-like graphic with a short broad double-edged dirk, pronounced guard, wrapped grip and pommel.
+- Wardrive companion redesigned as an ASCII-first tracked recon buddy.
+- Buddy now patrols across the screen instead of wobbling in one fixed location.
+- Left/right/fire/GPS-lost ASCII poses are selected dynamically.
+- Speech bubble swaps sides based on buddy position and retains event/XP quips.
+- World now has two parallax layers, scrolling terrain, road markers and moving landmarks.
+- Wardrive live view refresh target tightened to 85 ms for visibly smoother travel.
+- Existing v0.4.8 Wi-Fi signal tracker, BLE explorer/detail, wardrive backend, 2.4/optional C5 5 GHz/GPS/BLE logging preserved.

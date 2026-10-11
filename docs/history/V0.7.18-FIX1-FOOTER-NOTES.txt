@@ -1,0 +1,19 @@
+DIRK v0.7.18 FIX1 — Footer clipping correction (source test)
+
+Base: v0.7.18 Red Operations UI Pass 2.
+
+Changes in src/ui/Ui.h ONLY:
+- Red Target Posture: remove redundant help line at y=111 that ran into
+  footer at y=117, and put page count at right of the title.
+- Target Posture: compact finding rows to y=62/76/90, leaving safe room
+  for transient CSV save feedback at y=105.
+- Target Posture footer: L/R page | TAB CSV ; ENT finding.
+- Authorized Operation Result detail page 2: move its three lines to
+  y=79/92/105 rather than y=83/96/109, keeping final status above footer.
+
+No scan, transmission, parser, Wardrive, BLE, GPS, LoRa, capture, security
+assessment, or menu-navigation logic was changed. This build adds NO new
+active testing tools. Evaluate additional authorized Red Team assessments
+separately, with device/target scoping and safe timeout limits.
+
+Compile/hardware test on Cardputer ADV before replacing the current build.

@@ -1,0 +1,34 @@
+DIRK v0.7.17 — RED TEAM PASS1 (SOURCE TEST)
+
+Base: v0.7.16 FIX2 hardware test (dual-band SSID index repair confirmed in user photos).
+No changes to JanOSAdapter, MonsterC5 CSV parser, C5 indexed-SSID repair,
+C5 transport, S3 Wi-Fi provider, BLE, GPS, UnifiedApView, or WardriveManager.
+
+ADDED
+- Red Team > authorized tests > passive posture + SD report.
+  Requires operator-saved/authorized BSSID; cycles eligible targets with Up/Down,
+  switches findings page with Left/Right, exports CSV with Tab into /dirk/reports.
+  No active traffic from this feature. 5 GHz C5 unknown security is not mislabeled OPEN.
+- Red Team > portal / beacon lab > local portal supports optional file
+  /dirk/portal/notice.txt (<=1024 bytes). Displays as ESCAPED TEXT only;
+  no forms, scripts, password collection, or automatic DNS redirection.
+  Five-minute auto-shutdown. Prevents starting while Wardrive, capture or
+  Wi-Fi scan is active. Once-only server handler registration.
+- v0.7.17 splash/subsystem label.
+
+This is a cautious FIRST PASS of Red Team expansion, NOT a claim that
+all pentest tools or fully interactive portal flows have been added.
+No PlatformIO compile or Cardputer RF test was performed in the packaging
+runtime. Native unit/source guards passed. Keep hardware-working FIX2.
+
+BUILD ON CYBERDECK:
+ source /home/USER/.platformio-venv/bin/activate
+ unzip -o ~/Downloads/DIRK-v0.7.17-RED-TEAM-PASS1-TEST.zip -d ~/Projects/DIRK-v0.7.17
+ cd ~/Projects/DIRK-v0.7.17
+ pio run -e cardputer-adv
+
+SD COPY AFTER SUCCESSFUL BUILD:
+ Confirm SD partition using lsblk. Mount and copy firmware.bin to SD
+ Downloads/DIRK-v0.7.17-RED-TEAM-PASS1.bin. Do not overwrite FIX2.
+
+SEE docs/REDTEAM-0.7.17-ROADMAP.md for hardware checklist.

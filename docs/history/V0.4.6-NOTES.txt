@@ -1,0 +1,39 @@
+DIRK v0.4.6 TEST BUILD
+======================
+
+Hardware / transport
+- MonsterC5 UART moved to Cardputer ADV Grove/HY2.0-4P GPIO1 RX / GPIO2 TX.
+- GNSS remains isolated on Serial2 GPIO15 RX / GPIO13 TX through the LoRa/GPS Cap.
+- If JanOS/MonsterC5 is unavailable, wardrive continues with GPS + 2.4 GHz + BLE and 5G remains zero/unavailable.
+
+Splash
+- Rebuilt native 240x118 foreground assets for the 240x135 display.
+- Opaque hood/skull mass prevents Matrix rain from showing through the figure.
+- Red uses red-only rim/skull highlights and a horizontal dirk motif.
+- Blue uses blue/cyan-only highlights.
+- Matrix animation remains a separate background layer; footer remains 17 px.
+
+Wardrive V1 test implementation
+- New Wardrive menu, setup, tank view, live Wi-Fi list, grid/GPS view, stats/XP, provider status screen.
+- 2.4 GHz discovery uses the S3; BLE is time-sliced on the S3; 5 GHz uses MonsterC5 when ready; GNSS is continuously serviced.
+- New discoveries drive the tank muzzle-flash/status quips and XP/level counters.
+- Live list allows per-target save/exclude toggling without stopping the wardrive.
+- Session storage: /dirk/wardrive/sessions/<session>/
+  * wigle.csv (WiGLE 1.6 header/data)
+  * dirk.jsonl (native full-fidelity Wi-Fi observations, including no-fix observations)
+  * ble.csv
+  * track.csv
+  * stats.json on stop
+- Only GPS-valid Wi-Fi observations are emitted to wigle.csv; no 0,0 coordinates are created.
+- Provider screen reads /dirk/wardrive/config/providers.ini.
+
+Provider config scaffold
+Example /dirk/wardrive/config/providers.ini:
+  wigle_name=YOUR_API_NAME
+  wigle_token=YOUR_API_TOKEN
+  wdgwars_key=YOUR_64_CHAR_KEY
+
+IMPORTANT TEST SCOPE
+- This build is intended to hardware-validate simultaneous GNSS + S3 Wi-Fi/BLE + Grove MonsterC5 logging and the new Wardrive UI.
+- Direct HTTPS provider upload and QR/Companion credential entry are intentionally not executed in this test build yet; credentials/config and WiGLE-compatible session files are laid out for that provider pass after the RF/session loop is hardware-validated. This avoids shipping API-key transport before TLS/upload behavior is verified on the Cardputer target.
+- Wardriving remains passive discovery/logging only.

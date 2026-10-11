@@ -1,0 +1,16 @@
+DIRK v0.3.2 ADV keyboard bundled-API overlay
+
+Replaces:
+  src/ui/InputManager.h
+  src/ui/InputManager.cpp
+
+Changes:
+- Uses M5Cardputer's bundled Adafruit_TCA8418 header.
+- Uses its exact zero-argument begin() API.
+- Configures matrix(7,8), flushes FIFO, and polls available()/getEvent().
+- Does not compile a second standalone Adafruit TCA8418 library.
+- Does not rely on the GPIO11 interrupt flag.
+- Queue writes use explicit member assignment.
+
+Extract over the existing DIRK-Professional-Beta-v0.3.2-RC project.
+Then clean and rebuild.

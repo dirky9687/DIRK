@@ -1,0 +1,8 @@
+DIRK v0.5.3-FIX5
+
+- Restored reliable full-band asynchronous ESP32-S3 2.4 GHz scanning.
+- Recon live list uses reconEpoch, so saved/stale targets appear only when rediscovered.
+- Wardrive uses full-band async 2.4 GHz scans with BLE coexistence gaps.
+- Wardrive distance remains GNSS breadcrumb-derived only.
+- Added persistent Settings > distance units toggle: kilometers / miles.
+- Buddy now has an opaque shaped chassis/tread mask so terrain does not show through it without reintroducing a black square.

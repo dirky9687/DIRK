@@ -1,0 +1,6 @@
+DIRK v0.7.14 STEP 1: navigation consolidation
+BASELINE: v0.7.13-WARDRIVE-EXIT-BLE-TEST.zip
+UI only: 10-item home -> 7-item home, Data Center section, duplicate Wi-Fi Capture link removed, old shortcuts retained.
+The 5 GHz MonsterC5 scan/UART/CSV parser and 2.4 GHz/GPS/BLE/XP providers remain byte-identical.
+WardriveManager.h differs only in v0.7.13 to v0.7.14 logging metadata strings.
+Planned next: separate unified AP scanner pass after this build is tested.

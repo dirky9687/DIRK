@@ -1,0 +1,24 @@
+DIRK v0.7.16 FIX2 — MonsterC5 indexed SSID repair (hardware test build)
+======================================================================
+Observed on user v0.7.16 FIX1 diagnostic video: 5G diagnostics page 5/5 showed
+network names like 6, 7, 8 and 19 (name length 1-2), rather than full SSIDs.
+Raw page 3/5 revealed the actual JanOS format includes a leading row number:
+"33","Demo5G-Sample","","02:11:22:33:44:55","100","WPA2/WPA3 Mixed","-96","5GHz"
+The original CSV parser assumed the first field is the SSID, so these row
+numbers were incorrectly stored as SSIDs, preventing cross-band name matching.
+
+FIX2 adds a small post-parse correction only when the record matches the
+captured indexed format: numeric index, quoted network name, blank reserved
+column, BSSID matching the existing validated CSV output. It then replaces
+only the SSID value in the decoded record. The frozen C5 CSV parser, UART
+transport, scan commands, Wardrive manager, S3 Wi-Fi, GPS, and BLE are unchanged.
+SSID-first rows and intentionally numeric SSIDs keep their previous behavior.
+
+Host checks: original C5 CSV tests, added indexed/legacy/name-escape tests,
+unified AP view, name retention, mock C5 scans, and static menu/wardrive tests.
+
+This archive is SOURCE ONLY. Rebuild and flash with PlatformIO on the cyberdeck.
+No hardware or full PlatformIO build was performed in this environment.
+On hardware verify 5G Diagnostics page 5/5 now shows readable SSIDs, then
+check the known dual-band networks. If either still lacks 5 GHz, verify the
+raw list and router's 5 GHz channel/SSID (including DFS/hidden/network naming).

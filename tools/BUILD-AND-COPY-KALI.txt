@@ -1,0 +1,6 @@
+# Generic DIRK v0.8.0 build on Linux using PlatformIO
+cd DIRK-v0.8.0
+pio run -e cardputer-adv
+# Output (after a successful build): .pio/build/cardputer-adv/firmware.bin
+# Confirm your SD device with lsblk, mount it, and copy the firmware BIN
+# to the SD card folder used by M5Launcher. Never assume /dev/sda1 is safe.

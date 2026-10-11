@@ -1,0 +1,39 @@
+DIRK v0.4.8 LARGE UI / RECON PASS
+
+Splash
+- Replaces previous splash artwork with the exact DIRK menu mark as the source.
+- Enlarges it 2x using nearest-neighbor TFT blocks for a crisp 240x135 result.
+- Blue mode remaps red-dominant accent pixels to cyan/blue.
+- Red mode keeps the mark and adds a simplified pixel-clean horizontal dirk.
+- Matrix rain remains behind the logo and footer remains reserved.
+
+Wardrive recon buddy
+- Faster 120 ms visual refresh while the wardrive backend stays intact.
+- More expressive monitor-bot/tread design with multiple face states.
+- Animated antenna, bob/sway, moving tread blocks, recoil/muzzle flash.
+- Multi-layer scrolling terrain, lane markers, contact/star pixels, dust.
+- More varied speech bubbles and XP/event feedback.
+- GPS-loss and celebratory expressions.
+
+Wi-Fi
+- Adds passive live signal tracker for both 2.4 GHz S3 and 5 GHz C5 targets.
+- 36-sample rolling RSSI graph, target switching, and live rescan.
+- Keeps existing AP scanner, monitor, spectrum, probe/deauth monitors,
+  network tools, bounded beacon lab, diagnostics, saved targets, and
+  authorized-target red test path.
+
+BLE
+- Upgrades BLE page into passive live explorer.
+- Auto-refreshes advertisements while the BLE page is open.
+- Adds RSSI strength bars and a passive target detail page with address,
+  name state, RSSI and signal bar.
+
+Wardrive / data
+- Preserves v0.4.6/v0.4.7 GPS + 2.4 + optional MonsterC5 5 GHz + BLE
+  wardrive backend, sessions, XP, SD logs and WiGLE-compatible CSV.
+- Updates session metadata to 0.4.8.
+
+Safety
+- No unrestricted deauth/jamming or bulk active attack behavior added.
+- New Wi-Fi/BLE features are passive/diagnostic; existing bounded red-team
+  authorization gates are preserved.

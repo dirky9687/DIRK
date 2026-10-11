@@ -1,0 +1,16 @@
+DIRK v0.3.6 UI + Wi-Fi Tools overlay
+Baseline: user hardware-tested v0.3.5 working tree.
+
+Changes:
+- Full-screen clean vector-style DIRK splash; knife-shaped I; no busy raster background.
+- Hardware POST reduced to a footer that cycles one verified initialization result at a time.
+- Home menu integrates hotkeys into labels: [W]ifi, [B]luetooth, War[d]rive, etc.
+- Home footer no longer lists all quick keys.
+- Right rail uses a small clean text/knife DIRK mark and keeps the animated contextual icon separate.
+- Wi-Fi no longer auto-scans on entry. Wi-Fi opens a tools landing page first.
+- Band is chosen on Wi-Fi Tools page before scan. 5 GHz stays locked until verified JanOS scan support exists.
+- AP Scanner preserves current real 2.4 GHz scan and AP Inspect flow.
+- Saved Targets view for targets saved during the current session.
+- Channel Spectrum: scan-derived 2.4 GHz channel/RSSI visualization; TAB refreshes.
+- AP Inspect: S/Enter saves report to SD; A toggles explicit authorized-target state after save.
+- Deauth Test entry is authorization-gated and non-transmitting until a real frame-injection provider is implemented. No fake operation/status is presented.

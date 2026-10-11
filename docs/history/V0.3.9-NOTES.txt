@@ -1,0 +1,46 @@
+DIRK v0.3.9 - Wi-Fi completion pass
+
+Hardware-tested baseline: v0.3.8.
+
+UI
+- Red splash now uses the supplied canonical render crop instead of primitive D|RK drawing.
+- Main menu right rail uses the supplied rendered DIRK knife-I wordmark.
+- Blue splash uses a blue-team derivative asset for hardware review.
+- Preserves event-driven/no-flicker rendering.
+
+Storage
+- Cardputer ADV microSD explicitly initialized on SCK40/MISO39/MOSI14/CS12 at 25 MHz.
+- LoRa NSS GPIO5 held HIGH during SD use.
+- Boot-time write/read/delete self-test; SD capability is only green when writable.
+- Saved target CSV no longer calls SD.begin() independently.
+- AP reports verify written file size.
+- Saved target metadata now includes cipher, AKM, PMF, WPS, authorization.
+
+Wi-Fi 2.4 GHz
+- AP Scanner
+- Saved Targets
+- AP Monitor / RSSI refresh
+- Channel Spectrum
+- Passive Probe Monitor
+- Passive Deauth/Disassoc Monitor
+- Associated Network Tools + common gateway TCP port scan
+- Controlled Red-Team Beacon Lab (DIRK-LAB-01..04, low-rate 5-second burst)
+- Authorized Red Capture/Test: short target-specific deauth test, EAPOL/handshake PCAP, passive PMKID watch
+- Passive AP inspection parses RSN/WPS information when observed: cipher, AKM, PMF capable/required, WPS.
+
+5 GHz / MonsterC5
+- JanOS UART probe uses ping/pong.
+- 5G scan sends current JanOS scan_networks command only after JanOS responds.
+- UART transport now queues multiple response lines instead of overwriting one.
+- Parser accepts 5 GHz AP records that contain BSSID/channel/RSSI/SSID/security.
+- 5G scan and 5G spectrum use parsed MonsterC5 results.
+- No fabricated 5 GHz capability: header lights only after JanOS handshake.
+
+Network tools
+- Current associated IP, gateway, DNS, channel, RSSI.
+- Common TCP gateway port scan: 22,23,53,80,443,445,8080,8443.
+- A saved BSSID by itself does not provide layer-3 host addresses; connection is required for port scanning.
+
+Important
+- This source has been statically checked for file/brace consistency in the build environment here, but not compiled against your exact PlatformIO toolchain. Compile on the cyberdeck before flashing.
+- 5 GHz parsing is intentionally tolerant because JanOS releases can format scan records differently. Hardware test will tell us whether your installed JanOS output matches one of the accepted forms.

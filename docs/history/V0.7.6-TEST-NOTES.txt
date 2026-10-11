@@ -1,0 +1,10 @@
+DIRK v0.7.6 TEST / GNSS + WARDRIVE RENDERING
+
+- Faster cropped wardrive animation: 240x73 sprite @ screen y=44, 50ms tick
+- Menu canvas is reused/reallocated for wardrive to limit extra RAM
+- GPS-no-fix buddy quip shown once per loss interval, not on repeated idle slots
+- GPS Diagnostics: press TAB to toggle 115200/9600 GNSS serial baud; default still 115200
+- 5GHz command/parser unchanged; use existing 4-page C5 diagnostics and collect raw records
+- Preserves v0.7.5 bounded Wi-Fi/BLE ingestion and buffered SD logging
+
+NOT HARDWARE VERIFIED. If GPS RX is zero on both baud settings, check cap/power/pins using independent GPS firmware. If C5 RX is zero, check peripheral board and JanOS firmware before another DIRK parser patch.
